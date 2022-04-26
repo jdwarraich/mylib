@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
@@ -55,4 +56,18 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-process:2.4.1'
     //Dexter
     api 'com.karumi:dexter:6.2.3'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.jdwarraich'
+                artifactId = 'mylib'
+                version = '1.0.0'
+            }
+        }
+    }
 }
