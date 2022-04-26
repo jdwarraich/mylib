@@ -58,15 +58,22 @@ dependencies {
     api 'com.karumi:dexter:6.2.3'
 }
 
-afterEvaluate {
+task androidSourcesJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+
+project.afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
+                artifact androidSourcesJar // optional sources
 
                 groupId = 'com.github.jdwarraich'
                 artifactId = 'mylib'
-                version = '1.0.2'
+                version = '1.0.3'
             }
         }
     }
