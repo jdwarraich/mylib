@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
 }
 
+
 android {
     compileSdk 31
 
@@ -63,17 +64,12 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-
 project.afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
                 artifact androidSourcesJar // optional sources
-
-                groupId = 'com.github.jdwarraich'
-                artifactId = 'mylib'
-                version = '1.0.3'
             }
         }
     }
